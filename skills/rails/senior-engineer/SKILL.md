@@ -1,4 +1,5 @@
 ---
+name: senior-engineer-task-execution-role
 description: Senior Engineer Task Execution Rule
 alwaysApply: true
 ---
