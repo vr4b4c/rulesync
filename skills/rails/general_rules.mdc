@@ -1,0 +1,90 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+You are an expert in Ruby on Rails, PostgreSQL, Hotwire (Turbo and Stimulus), and Tailwind CSS.
+
+  Code Style and Structure
+  - Write concise, idiomatic Ruby code with accurate examples.
+  - Follow Rails conventions and best practices.
+  - Use object-oriented and functional programming patterns as appropriate.
+  - Prefer iteration and modularization over code duplication.
+  - Use descriptive variable and method names (e.g., user_signed_in?, calculate_total).
+  - Structure files according to Rails conventions (MVC, concerns, helpers, etc.).
+
+  Naming Conventions
+  - Use snake_case for file names, method names, and variables.
+  - Use CamelCase for class and module names.
+  - Follow Rails naming conventions for models, controllers, and views.
+
+  Ruby and Rails Usage
+  - Use Ruby 3.x features when appropriate (e.g., pattern matching, endless methods).
+  - Leverage Rails' built-in helpers and methods.
+  - Use ActiveRecord effectively for database operations.
+
+  Syntax and Formatting
+  - Follow the Ruby Style Guide (https://rubystyle.guide/)
+  - Use Ruby's expressive syntax (e.g., unless, ||=, &.)
+  - Prefer single quotes for strings unless interpolation is needed.
+  - Run Rubocop to lint the changes, run `bundle exec rubocop -a` so safe auto-corrections are made
+  - Avoid disabling rubocop rules when possible, attempt to clean up the code first
+  - Define `attr_reader` for all instance variables and use them to reference them (e.g. `subscription` instead of `@subscription`)
+
+  Error Handling and Validation
+  - Use exceptions for exceptional cases, not for control flow.
+  - Implement proper error logging and user-friendly messages.
+  - Use ActiveModel validations in models.
+  - Handle errors gracefully in controllers and display appropriate flash messages.
+
+  UI and Styling
+  - Use Hotwire (Turbo and Stimulus) for dynamic, SPA-like interactions.
+  - Implement responsive design with Tailwind CSS.
+  - Use Rails view helpers and partials to keep views DRY.
+
+  Performance Optimization
+  - Use database indexing effectively.
+  - Implement caching strategies (fragment caching, Russian Doll caching).
+  - Use eager loading to avoid N+1 queries.
+  - Optimize database queries using includes, joins, or select.
+
+  Gems
+  - prefer using the 'http' gem instead of Ruby's internal net/http library for HTTP requests, especially if the `http` gem exists in the `Gemfile`
+  - if there are errors when a gem is used, analyse the gem documentation to resolve the errors
+
+  Containers
+  - when running Docker Compose commands in this project, use 'docker compose' (the built-in Docker subcommand) instead of 'docker-compose'
+
+  Key Conventions
+  - Follow RESTful routing conventions.
+  - Use concerns for shared behavior across models or controllers.
+  - Implement service objects for complex business logic.
+  - Use background jobs (e.g., Sidekiq) for time-consuming tasks.
+
+  Testing
+  - Write comprehensive tests using RSpec
+  - Follow TDD/BDD practices.
+  - Use factories (FactoryBot) for test data generation.
+  - Never mock ActiveRecord models or queries, test against actual data using FactoryBot
+  - Do not mock methods on the object under test
+  - Always test all public methods in a class
+  - Do not test private methods or attributes of the object under test
+  - RSpec test files should begin with "# frozen_string_literal: true" and use the RSpec.describe style with let blocks and stub_template calls as shown.
+  - Do not define functions in spec files.
+  - Add shoulda matchers to model tests for all relationships you define in models; follow the style of the other specs and try to keep it inline with the other shoulda matchers
+  - Don't explicitly write the type of a spec, unless it's not working otherwise
+  - Keep sections of an example separated by a blank line. The sections are usually: setup, execute, expect
+  - Use match_response_schema in request specs. Don't parse the response body yourself. A project usually has other response schemas which you can replicate. To create response schemas for a resource you wrote, you can analyse the contents of the response body using the test you wrote, and create a JSON schema out of it. Use "enum" if a column accepts only some values.
+  - Avoid using `let!`, use let + before or reference it directly in the `it` example, whichever makes more sense
+  - If there’s only one public method in the class you're testing (e.g. service objects), don’t wrap everything in a single describe in tests
+  - Avoid using `update` over and over unless absolutely necessary. Prefer redefining the variable with `let`.
+
+  Running commands
+  - whatever command you're running, don't first change to working directory, just run the command.
+
+  Security
+  - Implement proper authentication and authorization (e.g., Devise, Pundit).
+  - Use strong parameters in controllers.
+  - Protect against common web vulnerabilities (XSS, CSRF, SQL injection).
+
+  Follow the official Ruby on Rails guides for best practices in routing, controllers, models, views, and other Rails components.

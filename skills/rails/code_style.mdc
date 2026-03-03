@@ -1,0 +1,73 @@
+---
+alwaysApply: true
+---
+
+## Rails Code Style Rules
+
+Source: Infinum Rails Handbook – Code Style ([guide](https://infinum.com/handbook/rails/development-practices/code-style))
+
+### General principles
+- Prefer using dependency inversion, not Rails concerns, because it's more explicit.
+
+## Controllers
+- don't put comments specifying the URL above API endpoints in controllers
+
+### Baseline style guides
+- Follow community guides: Ruby Style Guide, Rails Style Guide, Better Specs.
+- Enforce with RuboCop; project must include a `.rubocop.yml` for project-specific config.
+
+### RuboCop and tooling
+- Use RuboCop locally (CLI and editor integration). Keep it aligned with project `.rubocop.yml`.
+- Overcommit/Git hooks should run RuboCop on commit if configured; add if appropriate for the project.
+- After you write some code, run rubocop to ensure no warnings exist; if some exist, resolve them; do this only after you find the specs for all classes you wrote are passing
+
+### Documentation exceptions
+- Avoid documenting trivial domain classes (e.g., `User`, `Post`).
+- Document domain-specific business logic when interactions are non-obvious.
+- If adding a hack or non-standard implementation, an inline comment is mandatory.
+
+### Arrays of strings
+- Prefer standard Ruby array literals for strings:
+  - Allowed: `['Lucas', 'John', 'Tommy']`
+  - Optional but discouraged: `%w(Lucas John Tommy)`
+  - Use simple array literals especially when elements contain spaces.
+
+### General principles
+- Keep code idiomatic and readable; prefer clarity over cleverness.
+- Match existing project conventions when in doubt.
+- Keep public APIs explicit; avoid leaking internals.
+
+### Testing notes
+- Follow Better Specs principles; keep tests readable and intention-revealing.
+- Don’t over-mock; test behavior over implementation details.
+
+### RSpec Context Nesting
+- Limit RSpec context/describe block nesting to a maximum of 3 levels to comply with RuboCop's `RSpec/NestedGroups` cop
+- Avoid deeply nested contexts by:
+  - Flattening test structure where possible
+  - Combining related contexts into single describe blocks
+  - Using descriptive test names instead of additional context wrappers
+  - Moving shared setup to `before` blocks at appropriate levels
+
+Example of excessive nesting (❌ avoid):
+```ruby
+describe 'Feature' do
+  context 'when condition A' do
+    context 'when condition B' do
+      context 'when condition C' do  # 4 levels - too deep!
+        it 'does something' do
+        end
+      end
+    end
+  end
+end
+```
+
+Example of flattened structure (✅ prefer):
+```ruby
+describe 'Feature' do
+  context 'when condition A and B' do
+    it 'does something when condition C' do
+    end
+  end
+end
