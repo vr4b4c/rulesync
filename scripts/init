@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+mkdir .rulesync
+
+cat << EOF > .rulesync/.aiignore
+credentials/
+EOF
+echo "✔ Created .rulesync/.aiignore"
+
+
+cat << EOF > .rulesync/hooks.json
+{
+  "version": 1,
+  "hooks": {}
+}
+EOF
+echo "✔ Created .rulesync/hooks.json"
+
+cat << EOF > .rulesync/mcp.json
+{
+  "\$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/mcp-schema.json",
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {}
+    }
+  }
+}
+EOF
+echo "✔ Created .rulesync/mcp.json"
+
+cat << EOF > rulesync.jsonc
+{
+  "\$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
+  "targets": [
+    "cursor",
+    "claudecode",
+    "geminicli"
+  ],
+  "features": [
+    "rules",
+    "ignore",
+    "mcp",
+    "commands",
+    "subagents",
+    "skills",
+    "hooks"
+  ],
+  "baseDirs": ["."],
+  "delete": true,
+  "verbose": false,
+  "silent": false,
+  "global": false,
+  "simulateCommands": false,
+  "simulateSubagents": false,
+  "simulateSkills": false
+}
+EOF
+echo "✔ Created rulesync.jsonc"
+
+echo "
+✔ rulesync initialized successfully!
+ℹ Next steps:
+  1. Edit
+    ├── rulesync.jsonc
+    └── .rulesync
+        ├── .aiignore
+        ├── hooks.json
+        ├── hooks.json
+        ├── mcp.json
+        └── **/*.md
+  2. Run 'rulesync generate' to create configuration files"
