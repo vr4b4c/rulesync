@@ -7,7 +7,6 @@ credentials/
 EOF
 echo "✔ Created .rulesync/.aiignore"
 
-
 cat << EOF > .rulesync/hooks.json
 {
   "version": 1,
