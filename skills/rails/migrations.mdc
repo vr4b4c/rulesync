@@ -1,9 +1,0 @@
----
-alwaysApply: true
----
-
-## Database migrations
-- don't put # frozen_string_literal: true at the top unless other migrations in db/migrate folder also have it
-- add indexes to columns if the column is going to be often used in the business logic (eg: frequently finding a row by a column that is used by the client side in each request)
-- Use t.belongs_to with the foreign_key option (including on_delete if needed) instead of creating columns separately and adding foreign keys later.
-- add indices when you're creating the column in the same line, not with add_index after the create_table block
